@@ -1,18 +1,17 @@
 <?php
-require 'app' . DIRECTORY_SEPARATOR . 'connection.php';
-require 'template' . DIRECTORY_SEPARATOR . 'template.php';
-require 'view' . DIRECTORY_SEPARATOR . 'menu.php';
-$user = new USER($DB_con);
-$sess_name = 'my_cookie';
- setcookie('resource', $sess_name,  time() + (60 * 60 * 8), '/', null, null, true);
-if($user->is_loggedin()!="") {  
-$user->redirect('home.php');
-}
-@$user_id =$_SESSION['user_session'];
-$stmt = $DB_con->prepare("SELECT * FROM users WHERE user_id=:user_id");
-$stmt->execute(array(":user_id" => $user_id));
-$userRow = $stmt->fetch(PDO::FETCH_ASSOC);
-?>
-<h1>Please log in.</h1>
+/**
+ * Front to the WordPress application. This file doesn't do anything, but loads
+ * wp-blog-header.php which does and tells WordPress to load the theme.
+ *
+ * @package WordPress
+ */
 
+/**
+ * Tells WordPress to load the WordPress theme and output it.
+ *
+ * @var bool
+ */
+define('WP_USE_THEMES', true);
 
+/** Loads the WordPress Environment and Template */
+require( dirname( __FILE__ ) . '/wp-blog-header.php' );
